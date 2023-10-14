@@ -5,6 +5,7 @@ ARG N8N_VERSION
 
 ENV N8N_VERSION=latest
 ENV NODE_ENV=production
+USER root
 RUN set -eux; \
 	apkArch="$(apk --print-arch)"; \
 	case "$apkArch" in \
@@ -20,8 +21,6 @@ RUN set -eux; \
 # Install the browserless package
 RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-browserless && npm install n8n-nodes-clickuplookup
 
-# Set a custom user to not have n8n run as root
-USER root
 WORKDIR /data
 RUN apk --no-cache add su-exec
 COPY docker-entrypoint.sh /docker-entrypoint.sh
