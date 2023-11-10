@@ -19,7 +19,7 @@ RUN set -eux; \
 	rm -rf /root/.npm
 
 # Install the browserless package
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-clicksend && npm install n8n-nodes-clickuplookup && npm install n8n-nodes-browserless
+RUN mkdir /home/node/.n8n/nodes && cd /home/node/.n8n/nodes && npm install n8n-nodes-clicksend && npm install n8n-nodes-clickuplookup && npm install n8n-nodes-browserless
 
 # Set a custom user to not have n8n run as root
 WORKDIR /data
