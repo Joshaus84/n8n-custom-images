@@ -1,11 +1,12 @@
 # Use the official n8n image as a base
 FROM n8nio/n8n:latest
 
+# Set environment variables at the top:
+ENV N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=sharp,imagemagick
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+
 # Set the working directory to /home/node (n8n's default working directory)
 WORKDIR /home/node
-
-# Enable external modules in Code/Function nodes
-N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=sharp
 
 # Switch to root to install system dependencies
 USER root
@@ -34,3 +35,4 @@ RUN mkdir -p ~/.n8n/nodes && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-readpdfform --unsafe-perm && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-pdfkit --unsafe-perm && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-document-generator --unsafe-perm
+
