@@ -1,7 +1,7 @@
 FROM n8nio/n8n:latest
 
-# Install sharp globally so that it is available to all parts of the container
-RUN npm install -g sharp
+# Install sharp globally using --unsafe-perm to bypass permission issues
+RUN npm install -g sharp --unsafe-perm
 
 # Post v1.0: Install additional n8n nodes.
 RUN mkdir -p ~/.n8n/nodes && cd ~/.n8n/nodes && \
