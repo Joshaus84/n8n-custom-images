@@ -1,10 +1,10 @@
 FROM n8nio/n8n:latest
 
-# Switch to root so we have permission to install global packages
+# Switch to root to install local dependencies if needed
 USER root
-RUN npm install -g sharp --unsafe-perm
+RUN npm install sharp --unsafe-perm
 
-# Switch back to the default node user
+# Switch back to node user
 USER node
 
 # Post v1.0: Install additional n8n nodes.
