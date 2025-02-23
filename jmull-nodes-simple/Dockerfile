@@ -1,10 +1,10 @@
 FROM n8nio/n8n:latest
 
-# Install sharp globally (or in the default directory) so it’s available in your Function nodes.
+# Install sharp so it's available for your Function nodes.
 RUN npm install sharp
 
 # Post v1.0: Install additional n8n nodes.
-RUN mkdir ~/.n8n/nodes && cd ~/.n8n/nodes && \
+RUN mkdir -p ~/.n8n/nodes && cd ~/.n8n/nodes && \
     npm install n8n-nodes-clicksend && \
     npm install n8n-nodes-clickuplookup && \
     npm install @ilhamakbarki/n8n-nodes-clickup && \
