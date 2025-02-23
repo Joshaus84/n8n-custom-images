@@ -13,7 +13,11 @@ USER root
 # Install sharp locally in /home/node/node_modules
 RUN npm install sharp --unsafe-perm
 
-# Switch back to the default "node" user for runtime
+# Create the "node" user if it doesn't exist.
+# This command checks if "node" exists; if not, it creates it with UID 1000.
+RUN id node || adduser -D -u 1000 node
+
+# Switch back to the "node" user for runtime
 USER node
 
 # Install additional custom nodes in ~/.n8n/nodes with proper permissions
