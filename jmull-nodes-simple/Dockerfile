@@ -7,20 +7,20 @@ WORKDIR /home/node
 # Enable external modules in Code/Function nodes
 ENV N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=true
 
-# Switch to root to install local dependencies
+# Install ImageMagick (needed for conversion)
 USER root
+RUN apt-get update && apt-get install -y imagemagick
 
-# Install sharp locally in /home/node/node_modules
+# Install sharp locally (if needed for other tasks) – optional
 RUN npm install sharp --unsafe-perm
 
-# Create the "node" user if it doesn't exist.
-# This command checks if "node" exists; if not, it creates it with UID 1000.
+# Ensure the "node" user exists (create if needed)
 RUN id node || adduser -D -u 1000 node
 
-# Switch back to the "node" user for runtime
+# Switch back to the default "node" user
 USER node
 
-# Install additional custom nodes in ~/.n8n/nodes with proper permissions
+# (Optional) Install additional custom nodes as before
 RUN mkdir -p ~/.n8n/nodes && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-clicksend --unsafe-perm && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-clickuplookup --unsafe-perm && \
