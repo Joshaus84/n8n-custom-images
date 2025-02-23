@@ -1,19 +1,22 @@
-# Use the official n8n image as the base image
+# Use the official n8n image as a base
 FROM n8nio/n8n:latest
 
-# Enable external modules in Function/Code nodes
+# Set the working directory to /home/node (n8n's default working directory)
+WORKDIR /home/node
+
+# Enable external modules in Code/Function nodes
 ENV N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=true
 
 # Switch to root to install local dependencies
 USER root
 
-# Install sharp locally with unsafe-perm to avoid permission issues
+# Install sharp locally in /home/node/node_modules
 RUN npm install sharp --unsafe-perm
 
-# Switch back to the default "node" user for the rest of the build
+# Switch back to the default "node" user for runtime
 USER node
 
-# Install additional n8n nodes in the ~/.n8n/nodes directory
+# Install additional custom nodes in ~/.n8n/nodes with proper permissions
 RUN mkdir -p ~/.n8n/nodes && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-clicksend --unsafe-perm && \
     npm install --prefix ~/.n8n/nodes n8n-nodes-clickuplookup --unsafe-perm && \
