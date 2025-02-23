@@ -1,7 +1,7 @@
 FROM n8nio/n8n:latest
 
-# Install sharp so it's available for your Function nodes.
-RUN npm install sharp
+# Install sharp globally so that it is available to all parts of the container
+RUN npm install -g sharp
 
 # Post v1.0: Install additional n8n nodes.
 RUN mkdir -p ~/.n8n/nodes && cd ~/.n8n/nodes && \
