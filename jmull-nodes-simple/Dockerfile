@@ -1,7 +1,11 @@
 FROM n8nio/n8n:latest
 
-# Install sharp globally using --unsafe-perm to bypass permission issues
+# Switch to root so we have permission to install global packages
+USER root
 RUN npm install -g sharp --unsafe-perm
+
+# Switch back to the default node user
+USER node
 
 # Post v1.0: Install additional n8n nodes.
 RUN mkdir -p ~/.n8n/nodes && cd ~/.n8n/nodes && \
