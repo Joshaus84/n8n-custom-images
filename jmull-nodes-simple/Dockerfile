@@ -5,7 +5,7 @@ FROM n8nio/n8n:latest
 WORKDIR /home/node
 
 # Enable external modules in Code/Function nodes
-ENV N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=true
+N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=sharp
 
 # Switch to root to install system dependencies
 USER root
