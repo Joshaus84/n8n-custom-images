@@ -1,4 +1,4 @@
-FROM docker.n8n.io/n8nio/n8n
+FROM docker.io/n8nio/n8n
 
 ENV NODE_FUNCTION_ALLOW_EXTERNAL=sharp
 ENV N8N_FUNCTION_ALLOW_EXTERNAL_MODULES=sharp
