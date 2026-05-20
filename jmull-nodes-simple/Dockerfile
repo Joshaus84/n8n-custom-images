@@ -6,11 +6,13 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 USER root
 
-RUN apk add --no-cache \
-    python3 \
-    make \
-    g++ \
-    vips-dev
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        python3 \
+        make \
+        g++ \
+        libvips-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /home/node/.n8n/nodes \
     && chown -R node:node /home/node
@@ -19,7 +21,7 @@ USER node
 
 WORKDIR /home/node/.n8n
 
-RUN npm install --include=optional --os=linux --cpu=x64 --libc=musl sharp
+RUN npm install --include=optional --os=linux --cpu=x64 sharp
 
 WORKDIR /home/node/.n8n/nodes
 
