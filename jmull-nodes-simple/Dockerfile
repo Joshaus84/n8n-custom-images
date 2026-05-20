@@ -19,10 +19,7 @@ USER node
 
 WORKDIR /home/node/.n8n
 
-RUN npm install \
-    sharp \
-    @img/sharp-linuxmusl-x64 \
-    @img/sharp-libvips-linuxmusl-x64
+RUN npm install --include=optional --os=linux --cpu=x64 --libc=musl sharp
 
 WORKDIR /home/node/.n8n/nodes
 
