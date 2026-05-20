@@ -6,14 +6,6 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 USER root
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        python3 \
-        make \
-        g++ \
-        libvips-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 RUN mkdir -p /home/node/.n8n/nodes \
     && chown -R node:node /home/node
 
